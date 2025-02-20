@@ -12,6 +12,12 @@ from django.utils.decorators import method_decorator
 from django.middleware.csrf import get_token
 from django.conf import settings
 from chatbot.services import get_recommendation, check_data_status
+from .serializers import RecommendationHistorySerializer, ChatHistorySerializer
+from rest_framework.views import APIView
+from . models import LottoDraw
+from datetime import datetime
+from rest_framework.response import Response
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +41,7 @@ class DataStatusView(View):
         })
 
 @method_decorator(csrf_exempt, name='dispatch')
-class ChatAPIView(View):
+class ChatAPIView(APIView):
     """Main API view for handling chat interactions"""
     
     def __init__(self):
@@ -219,6 +225,35 @@ class ChatAPIView(View):
 
                     # 번호 추천 결과만 반환
                     response_message = self._format_recommendations(recommendations)
+                    
+                    # Chathistory DB저장 추가
+                    serializer = ChatHistorySerializer(data=request.data)
+                    if request.user.is_authenticated:
+                        if serializer.is_valid():
+                            serializer.save(user=request.user, user_message=user_message, bot_response=response_message)
+                            print("db저장 성공 -> chathistory")
+                    
+                    # Recommendation DB저장 추가
+                    import re
+                    
+                    pattern_num = r"□ \d+세트: ([\d, ]+)"
+                    matches_num = re.findall(pattern_num, response_message)
+                    
+                    pattern_strategy = r"전략 (\d+):"
+                    match_strategy = re.search(pattern_strategy, response_message)
+                    strategy = match_strategy.group(1)
+                    
+                    for match in matches_num:
+                        data_strategy = {"strategy": strategy, "numbers": match}
+                        serializer_recomend = RecommendationHistorySerializer(data=data_strategy)
+                        
+                        if request.user.is_authenticated:
+                            if serializer_recomend.is_valid():
+                                serializer_recomend.save(user=request.user)
+                                print("db저장 성공 -> recommend")
+                            else:
+                                print("유효성 검사 실패:", serializer_recomend.errors)
+                    
                     return JsonResponse({'response': response_message}, status=200)
                     
                 except Exception as e:
@@ -231,6 +266,13 @@ class ChatAPIView(View):
             else:
                 try:
                     assistant_message = self._get_gpt_response(user_message)
+                    
+                    serializer = ChatHistorySerializer(data=request.data)
+                    if request.user.is_authenticated:
+                        if serializer.is_valid():
+                            serializer.save(user=request.user, user_message=user_message, bot_response=assistant_message)
+                            print("db저장 성공")
+                            
                     return JsonResponse({'response': assistant_message}, status=200)
                 except Exception as e:
                     logger.error(f"GPT Error: {str(e)}")
@@ -243,3 +285,27 @@ class ChatAPIView(View):
             return JsonResponse({
                 'response': '서버 에러가 발생했습니다. 잠시 후 다시 시도해주세요.'
             }, status=500)
+
+
+class SaveDBAPIView(APIView):
+    def get(self, request):
+        df = pd.read_csv("data/lotto_history.csv")
+
+        for col in ['1', '2', '3', '4', '5', '6']:
+            df[col] = df[col].astype(float).astype(int)
+        df['추첨일'] = df['추첨일'].apply(lambda x: datetime.strptime(x, "%Y.%m.%d").strftime("%Y-%m-%d"))
+
+
+        for _, row in df.iterrows():
+            if not LottoDraw.objects.filter(round_no=int(row['회차'])).exists():
+                LottoDraw.objects.create(
+                    round_no=int(row['회차']),
+                    draw_date=row['추첨일'],
+                    winning_numbers=",".join(map(str, [row['1'], row['2'], row['3'], row['4'], row['5'], row['6']])),
+                    bonus_number=int(row['보너스'])
+                )
+                print(f"회차 {row['회차']} DB에 저장 완료!")
+            
+        # LottoDraw.objects.filter(round_no=1159).delete()
+        # print("1159회차 삭제 완료!")
+        return Response({"msg": "DB저장 성공!"})

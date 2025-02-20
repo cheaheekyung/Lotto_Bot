@@ -21,8 +21,8 @@ class ChatHistory(models.Model):
 
 class Recommendation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    numbers = models.JSONField()  # 추천된 번호들 저장
-    strategy = models.IntegerField()  # 사용된 전략
+    numbers = models.TextField()  # 추천된 번호들 저장
+    strategy = models.TextField()  # 사용된 전략
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
