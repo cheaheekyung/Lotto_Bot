@@ -7,7 +7,7 @@ class LottoDrawSerializer(serializers.ModelSerializer):
         model = LottoDraw
         fields = ['id', 'round_no', 'draw_date', 'winning_numbers', 'bonus_number']
 
-class RecommendationSerializer(serializers.ModelSerializer):
+class RecommendationHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Recommendation
         fields = "__all__"

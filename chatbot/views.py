@@ -19,7 +19,6 @@ from rest_framework.permissions import IsAuthenticated  # 추가
 from rest_framework import status  # 추가
 from chatbot.services import get_recommendation, check_data_status
 from .models import Recommendation, LottoDraw  # LottoDraw 추가
-from .serializers import RecommendationSerializer  # 추가
 
 from .serializers import RecommendationHistorySerializer, ChatHistorySerializer
 from datetime import datetime
@@ -321,7 +320,7 @@ class HistoryAPIView(APIView):
                         rec.draw_date = latest_draw.draw_date # 확인한 날짜 저장
                         rec.save()
 
-            serializer = RecommendationSerializer(recommendations, many=True)
+            serializer = RecommendationHistorySerializer(recommendations, many=True)
             
             response_data = {
                 'recommendations': serializer.data,
