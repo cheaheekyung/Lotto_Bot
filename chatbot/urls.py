@@ -5,15 +5,18 @@ from .views import (
     ChatbotHomeView, 
     CSRFTokenView, 
     ChatAPIView, 
-    DataStatusView  # views.py에 있는 이름과 일치하게 수정
+    DataStatusView,     # views.py에 있는 이름과 일치하게 수정
+    SaveDBAPIView,
+    HistoryAPIView
 )
 
 app_name = 'chatbot'
 
 urlpatterns = [
-    path('', ChatbotHomeView.as_view(), name='home'),
-    path('api/chatbot/csrf/', CSRFTokenView.as_view(), name='csrf-token'),
-    path('api/chatbot/chat/', ChatAPIView.as_view(), name='chat'),
-    path('api/chatbot/data-status/', DataStatusView.as_view(), name='data-status'),  # 기존 data-status URL
-    path('status/', DataStatusView.as_view(), name='status'),  # 새로운 status URL
+    path('', ChatbotHomeView.as_view(), name='chat'),
+    path('csrf/', CSRFTokenView.as_view(), name='csrf-token'),
+    path('chat/', ChatAPIView.as_view(), name='chat'),
+    path('status/', DataStatusView.as_view(), name='status'),
+    path('history/', HistoryAPIView.as_view(), name='history'),
+    path("save/", SaveDBAPIView().as_view()),
 ]

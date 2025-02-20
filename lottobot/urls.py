@@ -17,7 +17,9 @@ urlpatterns = [
     # accounts 앱 URLs
     path("api/accounts/", include("accounts.urls", namespace="accounts")),
     # 메인 페이지와 다른 기능들
+    path('main/', login_required(views.main_view), name='main'),
     path("api/main/", login_required(views.main_view), name="main"),
+    # path('mypage/', login_required(views.mypage_view), name='mypage'),
     path("api/chatbot/", include("chatbot.urls")),
-    path("api/mypage/", login_required(views.mypage_view), name="mypage"),
+    path("api/mypage/", views.MypageAPIView.as_view(), name="mypage"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
