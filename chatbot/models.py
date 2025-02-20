@@ -22,15 +22,10 @@ class ChatHistory(models.Model):
         return f"Chat by {self.user} at {self.created_at}"
 
 class Recommendation(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    recommendation_date = models.DateField(auto_now_add=True)
-    created_at = models.DateTimeField(auto_now_add=True)  # 생성일시
-    strategy = models.IntegerField()  # 1 또는 2
-    numbers = models.CharField(max_length=20)  # "1,3,6,34,47,25" 형식으로 저장
-    is_checked = models.BooleanField(default=False)  # 당첨 여부 확인 했는지
-    is_won = models.BooleanField(default=False)  # 당첨 여부
-    draw_round = models.IntegerField(null=True)  # 해당 회차
-    draw_date = models.DateField(null=True)  # 추첨일
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    numbers = models.TextField()  # 추천된 번호들 저장
+    strategy = models.TextField()  # 사용된 전략
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-recommendation_date']

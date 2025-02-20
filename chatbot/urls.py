@@ -1,15 +1,22 @@
 # chatbot/urls.py
 
 from django.urls import path
-from . import views
-from .views import ChatbotHomeView, CSRFTokenView, ChatAPIView, DataStatusView, HistoryAPIView
+from .views import (
+    ChatbotHomeView, 
+    CSRFTokenView, 
+    ChatAPIView, 
+    DataStatusView,     # views.py에 있는 이름과 일치하게 수정
+    SaveDBAPIView,
+    HistoryAPIView
+)
 
 app_name = 'chatbot'
 
 urlpatterns = [
     path('', ChatbotHomeView.as_view(), name='chat'),
-    path('chatbot/csrf/', CSRFTokenView.as_view(), name='csrf-token'),
-    path('chatbot/chat/', ChatAPIView.as_view(), name='chat'),
-    path('chatbot/status/', DataStatusView.as_view(), name='status'),
+    path('csrf/', CSRFTokenView.as_view(), name='csrf-token'),
+    path('chat/', ChatAPIView.as_view(), name='chat'),
+    path('status/', DataStatusView.as_view(), name='status'),
     path('history/', HistoryAPIView.as_view(), name='history'),
+    path("save/", SaveDBAPIView().as_view()),
 ]
