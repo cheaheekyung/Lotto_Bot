@@ -348,6 +348,7 @@ class SaveDBAPIView(APIView):
         for col in ['1', '2', '3', '4', '5', '6']:
             df[col] = df[col].astype(float).astype(int)
         df['추첨일'] = df['추첨일'].apply(lambda x: datetime.strptime(x, "%Y.%m.%d").strftime("%Y-%m-%d"))
+        df = df.sort_values(by='회차', ascending=True)
 
 
         for _, row in df.iterrows():
@@ -360,6 +361,7 @@ class SaveDBAPIView(APIView):
                 )
                 print(f"회차 {row['회차']} DB에 저장 완료!")
             
-        # LottoDraw.objects.filter(round_no=1159).delete()
-        # print("1159회차 삭제 완료!")
+        LottoDraw.objects.filter(round_no=1159).delete()
+        print("1159회차 삭제 완료!")
         return Response({"msg": "DB저장 성공!"})
+    

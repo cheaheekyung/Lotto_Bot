@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "corsheaders",
     # Local Apps
     "accounts",
-    "chatbot.apps.ChatbotConfig",
+    "chatbot",
 ]
 
 CRONJOBS = [

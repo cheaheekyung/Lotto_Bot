@@ -5,6 +5,8 @@ from chatbot.models import Recommendation, LottoDraw
 from rest_framework.views import APIView
 from chatbot.serializers import MypageSerializer
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+from chatbot.models import LottoDraw
 
 @login_required
 def main_view(request):
@@ -34,6 +36,28 @@ def main_view(request):
         'latest_numbers': latest_numbers
     }
     return render(request, 'lottobot/main.html', context)
+
+
+class MainpageAPIView(APIView):
+    permission_classes = [AllowAny]     # 메인페이지 로그인해야 볼수있게할건지?? 거기에맞게 수정만하면됨 일단 다 가능하게해둠
+    
+    def get(self, request):
+        lottodraw = LottoDraw.objects.order_by('-round_no').first()
+        if not lottodraw:
+            return Response({"message": "DB에 로또데이터가 없습니다."})
+        nums = lottodraw.winning_numbers.split(',')
+        data = {
+            "회차": lottodraw.round_no,
+            "추첨 일자": lottodraw.draw_date,
+            "번호1": nums[0],
+            "번호2": nums[1],
+            "번호3": nums[2],
+            "번호4": nums[3],
+            "번호5": nums[4],
+            "번호6": nums[5],
+            "보너스번호": lottodraw.bonus_number,
+        }
+        return Response(data)
 
 class MypageAPIView(APIView):
     

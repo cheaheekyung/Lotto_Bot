@@ -18,5 +18,5 @@ urlpatterns = [
     path('chat/', ChatAPIView.as_view(), name='chat'),
     path('status/', DataStatusView.as_view(), name='status'),
     path('history/', HistoryAPIView.as_view(), name='history'),
-    path("save/", SaveDBAPIView().as_view()),
+    path("save/db/", SaveDBAPIView().as_view()),
 ]
