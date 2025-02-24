@@ -1,0 +1,143 @@
+
+/* 사이드바 */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 220px;
+  background-color: #4A53B5;
+  color: #fff;
+}
+
+/* 사이드바 헤더 */
+.sidebar-header {
+  padding: 20px;
+  background-color: #3b4194;
+  text-align: center;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* 사이드바 네비게이션 */
+.sidebar-nav {
+  margin-top: 20px;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav li {
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 15px 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebar-nav a:hover {
+  background-color: #333a80;
+}
+
+
+/* 기본 페이지 스타일 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* 챗봇 컨테이너 */
+.chat-container {
+  max-width: 600px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  height: 80vh;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* 챗봇 헤더 */
+.chat-header {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  background-color: #4A53B5;
+  color: #fff;
+}
+
+/* 대화 내용 영역 */
+.chat-box {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+/* 메시지 스타일 */
+.chat-message {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.chat-message.user {
+  justify-content: flex-end;
+}
+
+.chat-message.bot {
+  justify-content: flex-start;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.message.user {
+  background-color: #4A53B5;
+  color: #fff;
+}
+
+.message.bot {
+  background-color: #e9e9e9;
+  color: #333;
+}
+
+/* 채팅 입력 폼 */
+#chat-form {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  font-size: 16px;
+}
+
+#chat-form button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4A53B5;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#chat-form button:hover {
+  background-color: #4A53B5;
+}

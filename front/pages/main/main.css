@@ -1,0 +1,141 @@
+/* 전체 기본 스타일 초기화 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f2f2f2;
+  }
+  
+  /* 사이드바 */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 220px;
+    background-color: #4A53B5;
+    color: #fff;
+  }
+  
+  /* 사이드바 헤더 */
+  .sidebar-header {
+    padding: 20px;
+    background-color: #3b4194;
+    text-align: center;
+  }
+  
+  .sidebar-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  /* 사이드바 네비게이션 */
+  .sidebar-nav {
+    margin-top: 20px;
+  }
+  
+  .sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-nav li {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .sidebar-nav a {
+    display: block;
+    padding: 15px 20px;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .sidebar-nav a:hover {
+    background-color: #333a80;
+  }
+  
+  /* 메인 컨텐츠 영역 */
+  .main-content {
+    margin-left: 220px;
+    padding: 20px;
+  }
+  
+  /* 메인 헤더 */
+  .main-header {
+    margin-bottom: 20px;
+  }
+  
+  .main-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  
+  /* 로또 섹션 */
+  .lotto-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* 최신 당첨번호 카드 */
+  .lotto-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .lotto-card h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  #round-info {
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 1rem;
+  }
+  
+  /* 번호 표시 영역 */
+  .lotto-numbers {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .number,
+  .bonus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #ddd;
+    color: #333;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  .bonus {
+    background-color: #ffc107;
+    color: #000;
+  }
+  
+  /* 추가 기능 카드 */
+  .action-cards {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .action-card {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .action-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }

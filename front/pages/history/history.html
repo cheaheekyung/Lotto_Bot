@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>히스토리 페이지</title>
+    <link rel="stylesheet" href="history.css"> <!-- CSS 링크 -->
+</head>
+<body>
+   <!-- 좌측 사이드바 -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>Lotto Bot</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="http://127.0.0.1:5500/Lotto_Bot/front/pages/main/main.html">홈</a></li>
+        <li><a href="http://127.0.0.1:5500/Lotto_Bot/front/pages/history/history.html">추천 번호 히스토리</a></li>
+        <li><a href="http://127.0.0.1:5500/Lotto_Bot/front/pages/chatbot/chatbot.html">번호 추천받기</a></li>
+        
+      </ul>
+      <div class="user-info">
+        <a onclick="logout()">로그아웃</a> <!-- 로그아웃 버튼 -->
+    </div>
+    </nav>
+  </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>추천 히스토리</h1>
+
+        <!-- 상단 헤더 -->
+        <div id="history-list">
+            <div class="history-header">
+                <div>추천 날짜</div>
+                <div>전략</div>
+                <div>추천 번호</div>
+                <div>추첨일</div>
+                <div>당첨 여부</div>
+            </div>
+
+            <!-- 추천 히스토리 데이터는 여기에 동적으로 추가됩니다 -->
+            <div class="history-item">
+                <div>2025-01-01</div>
+                <div>전략 A</div>
+                <div>1, 2, 3, 4, 5, 6</div>
+                <div>2025-01-03</div>
+                <div>1등</div>
+            </div>
+            <!-- 여기에 추가적으로 추천 히스토리 항목이 동적으로 삽입됩니다. -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="history.js"></script>  <!-- JS 링크 -->
+</body>
+</html>
