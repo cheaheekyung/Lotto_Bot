@@ -361,7 +361,7 @@ class SaveDBAPIView(APIView):
                 )
                 print(f"회차 {row['회차']} DB에 저장 완료!")
             
-        LottoDraw.objects.filter(round_no=1159).delete()
-        print("1159회차 삭제 완료!")
+        # LottoDraw.objects.filter(round_no=1159).delete()
+        # print("1159회차 삭제 완료!")
         return Response({"msg": "DB저장 성공!"})
     
