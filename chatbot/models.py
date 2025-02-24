@@ -12,14 +12,16 @@ class LottoDraw(models.Model):
     def __str__(self):
         return f"회차: {self.round_no}, 날짜: {self.draw_date}"
 
+
 class ChatHistory(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     user_message = models.TextField()
     bot_response = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return f"Chat by {self.user} at {self.created_at}"
+
 
 class Recommendation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -28,5 +30,4 @@ class Recommendation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-created_at']
-
+        ordering = ["-created_at"]

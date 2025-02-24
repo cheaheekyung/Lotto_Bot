@@ -21,7 +21,7 @@ OPENAI_API_KEY = os.getenv("OPEN_API_KEY")
 # 기본 Django 설정
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # CSRF 설정
 CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000", "http://localhost:3000"]
@@ -54,8 +54,8 @@ CRONJOBS = [
 
 # 미들웨어 설정
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",

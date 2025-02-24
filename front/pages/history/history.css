@@ -1,0 +1,133 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* 제목 스타일 */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* 사이드바 */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 220px;
+    background-color: #4A53B5;
+    color: #fff;
+  }
+  
+  /* 사이드바 헤더 */
+  .sidebar-header {
+    padding: 20px;
+    background-color: #3b4194;
+    text-align: center;
+  }
+  
+  .sidebar-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  /* 사이드바 네비게이션 */
+  .sidebar-nav {
+    margin-top: 20px;
+  }
+  
+  .sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-nav li {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .sidebar-nav a {
+    display: block;
+    padding: 15px 20px;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .sidebar-nav a:hover {
+    background-color: #333a80;
+  }
+  
+
+/* 로그아웃 버튼 */
+#logout-button {
+    display: block;
+    width: 100%; /* 사이드바 너비에 맞게 버튼 확장 */
+    padding: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left; /* 왼쪽 정렬 */
+    position: absolute;
+    top: 20px; /* 위로 올리기 위한 조정 */
+    left: 20px; /* 왼쪽으로 정렬 */
+}
+
+#logout-button:hover {
+    background-color: #ff2e2e;
+}
+
+/* 메인 콘텐츠 영역 */
+.main-content {
+    margin-left: 250px; /* 사이드바 너비만큼 왼쪽 여백 추가 */
+    padding: 20px;
+    background-color: #fff;
+    min-height: 100vh; /* 최소 높이를 화면 크기만큼 */
+}
+
+/* 히스토리 목록 스타일 */
+#history-list {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 헤더 스타일 (상단 항목들) */
+.history-header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5개의 항목을 균등하게 배치 */
+    gap: 10px;
+    font-weight: bold;
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.history-header div {
+    text-align: center;
+    padding: 5px;
+}
+
+/* 개별 히스토리 항목 */
+.history-item {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5개의 항목을 균등하게 배치 */
+    gap: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.history-item div {
+    text-align: center;
+    padding: 5px;
+}
