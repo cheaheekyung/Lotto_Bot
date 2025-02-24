@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotto Bot</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h1>Lotto Bot</h1>
+        <!-- <a href="#">홈</a>   여기가 홈이라 홈 버튼 필요없음, 다른 페이지에 넣을 용으로 남김-->
+        <a href="/Lotto_Bot/front/pages/history/history.html">추천 번호 히스토리</a>
+        <a href="#">번호 추천받기</a>
+
+        <div class="user-info">
+            <p><span id="username">username</span>님</p>
+            <a onclick="logout()">로그아웃</a> <!--로컬 호스트 주소를 쓰는건지, api주소를 쓰는건지?-->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">로또 번호 추천 서비스</div>
+
+        <div class="lotto-box">
+            <p id="lotto-round">1159회 (<span id="lotto-date">2025.02.15</span>)</p>
+            <div class="lotto-numbers" id="lotto-numbers">
+                <!-- 번호들은 JS에서 동적으로 추가 -->
+            </div>
+        </div>
+
+        <div class="button-container">
+            <div class="button recommend-button">번호 추천받기</div>
+            <div class="button history-button">추천 번호 히스토리</div>
+        </div>
+    </div>
+
+
+    <script src="logout.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

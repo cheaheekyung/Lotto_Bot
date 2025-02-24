@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <h1>로그인</h1>
+    
+    <form id="login-form">
+        
+        <label for="username"></label>
+        <input type="text" id="username" placeholder="아이디" required>
+
+        <label for="password"></label>
+        <input type="password" id="password" placeholder="비밀번호" required>
+
+        <button type="submit">로그인</button>
+        <button id="signup-button">회원가입</button>
+        
+        </a>
+    </form>
+
+    <!-- ✅ axios CDN 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- ✅ login.js 연결 -->
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>로또 번호 추천 서비스</title>
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+  <!-- 좌측 사이드바 -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>Lotto Bot</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="http://127.0.0.1:5500/Lotto_Bot/front/pages/main/main.html">홈</a></li>
+        <li><a href="http://127.0.0.1:5500/Lotto_Bot/front/pages/history/history.html">추천 번호 히스토리</a></li>
+        <li><a href="http://127.0.0.1:5500/Lotto_Bot/front/pages/chatbot/chatbot.html">번호 추천받기</a></li>
+        
+      </ul>
+      <div class="user-info">
+        <a onclick="logout()">로그아웃</a> <!-- 로그아웃 버튼 -->
+    </div>
+    </nav>
+  </div>
+
+  <!-- 메인 컨텐츠 영역 -->
+  <div class="main-content">
+    <header class="main-header">
+      <h1>로또 번호 추천 서비스</h1>
+    </header>
+
+    <!-- 최신 당첨 번호 섹션 -->
+    <section class="lotto-section">
+      <div class="lotto-card">
+        <h2>최신 당첨 번호</h2>
+        <p id="round-info"></p>
+        <div class="lotto-numbers">
+          <span class="number" id="num1"></span>
+          <span class="number" id="num2"></span>
+          <span class="number" id="num3"></span>
+          <span class="number" id="num4"></span>
+          <span class="number" id="num5"></span>
+          <span class="number" id="num6"></span>
+          <span class="bonus" id="bonus"></span>
+        </div>
+      </div>
+
+      <!-- 추가 기능 카드 -->
+      <!-- <div class="action-cards">
+        <div class="action-card">
+          <h3>번호 추천받기</h3>
+          <p>AI 챗봇을 통해 로또 번호를 추천받아보세요</p>
+        </div>
+        <div class="action-card">
+          <h3>추천 번호 히스토리</h3>
+          <p>이전에 추천받은 번호들을 확인해보세요</p>
+        </div>
+      </div> -->
+    </section>
+  </div>
+
+  <!-- ✅ axios CDN 추가 -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
