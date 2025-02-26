@@ -1,9 +1,9 @@
-
 let isGetRequestSent = false; // 플래그 변수 추가
 document.addEventListener("DOMContentLoaded", async function() {
     if (isGetRequestSent) return; // 이미 요청했다면 실행 안 함
     isGetRequestSent = true; // 요청 상태 변경
-    console.log("초기 겟요청 실행됨")
+    console.log("초기 포스트 요청 실행됨");
+    
     let token = localStorage.getItem("access_token");
     if (!token || token.trim() === "") {
         alert("로그인이 필요합니다.");
@@ -33,18 +33,20 @@ document.addEventListener("DOMContentLoaded", async function() {
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    // 초기 GET 요청
+    // 초기 POST 요청
     try {
         console.log("요청보낼거임");
-        const getResponse = await axios.get("http://localhost:8000/api/chatbot2/chat/", {
+        const postResponse = await axios.post("http://localhost:8000/api/chatbot2/chat/", {
+            message: "안녕하세요, 어떤 챗봇인지 알려줘. 추천 방법을 알려줘"
+        }, {
             headers: { Authorization: `Bearer ${token}` }
         });
-        console.log("겟응답 받음", getResponse.data)
-        if (getResponse.data && getResponse.data.response) {
-            appendMessage("bot", getResponse.data.response);
+        console.log("POST 응답 받음", postResponse.data)
+        if (postResponse.data && postResponse.data.response) {
+            appendMessage("bot", postResponse.data.response);
         }
     } catch (error) {
-        console.error("초기 GET 요청 에러:", error);
+        console.error("초기 POST 요청 에러:", error);
     }
 
     window.addEventListener("beforeunload", function () {
@@ -82,3 +84,14 @@ document.addEventListener("DOMContentLoaded", async function() {
         }
     });
 });
+
+function logout() {
+    if (confirm("정말 로그아웃 하시겠습니까?")) {
+        // localStorage에서 토큰 삭제
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+
+        // 로그아웃 후 로그인 페이지로 리다이렉트
+        window.location.href = 'http://127.0.0.1:5500/Lotto_Bot/front/pages/login/login.html';
+    }
+}

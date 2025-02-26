@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>로또 번호 추천 챗봇</title>
+  <link rel="stylesheet" href="chatbot.css">
+  <!-- axios 라이브러리 -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <!-- 좌측 사이드바 -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>Lotto Bot</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="http://127.0.0.1:5500/Lotto_Bot/front/pages/main/main.html">홈</a></li>
+        <li><a href="http://127.0.0.1:5500/Lotto_Bot/front/pages/history/history.html">추천 번호 히스토리</a></li>
+        <li><a href="http://127.0.0.1:5500/Lotto_Bot/front/pages/chatbot/chatbot.html">번호 추천받기</a></li>
+        
+      </ul>
+      <div class="user-info">
+        <a onclick="logout()">로그아웃</a> <!-- 로그아웃 버튼 -->
+    </div>
+    </nav>
+  </div>
+
+  <div class="chat-container">
+    <header class="chat-header">
+      <h1>로또 번호 추천 챗봇</h1>
+      <p>
+        로또 번호 추천을 받아보세요.<br>
+      </p>
+    </header>
+    <div id="chat-box" class="chat-box">
+      <!-- 챗봇 대화 내용 -->
+    </div>
+    <!-- onsubmit 속성 추가 -->
+    <form id="chat-form">
+      <input type="text" id="chat-input" placeholder="메시지를 입력하세요..." autocomplete="off">
+      <button type="submit">전송</button>
+    </form>
+  </div>
+  <script src="chatbot-2.js"></script>
+</body>
+</html>
