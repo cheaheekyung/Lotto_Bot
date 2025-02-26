@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Local Apps
     "accounts",
     "chatbot",
+    "chatbot2",
 ]
 
 CRONJOBS = [

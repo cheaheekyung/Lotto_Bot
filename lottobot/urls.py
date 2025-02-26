@@ -21,6 +21,7 @@ urlpatterns = [
     # path("api/main/", login_required(views.main_view), name="main"),
     # path('mypage/', login_required(views.mypage_view), name='mypage'),
     path("api/chatbot/", include("chatbot.urls")),
+    path("api/chatbot2/", include("chatbot2.urls")),
     path("api/mypage/", views.MypageAPIView.as_view(), name="mypage"),
     path("api/main/", views.MainpageAPIView.as_view(), name="mainpage"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

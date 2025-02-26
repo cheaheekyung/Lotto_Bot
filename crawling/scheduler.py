@@ -15,9 +15,9 @@ def start_scheduler():
     scheduler = BackgroundScheduler()
     
     # 매주 토요일 22:00에 크롤링 작업 실행 -> 크롤링 작업: crawling.py 에 있는 crawl_website함수 호출
-    scheduler.add_job(crawl_website, CronTrigger(hour=22, minute=3, day_of_week='0'))
+    scheduler.add_job(crawl_website, CronTrigger(hour=22, minute=3, day_of_week='6'))
     #테스트용
-    # scheduler.add_job(crawl_website, CronTrigger(hour=18, minute=17))
+    # scheduler.add_job(crawl_website, CronTrigger(hour=11, minute=13))
     
     # 스케줄러 시작
     scheduler.start()
