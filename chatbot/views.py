@@ -231,12 +231,12 @@ class ChatAPIView(APIView):
                     # 번호 추천 결과만 반환
                     response_message = self._format_recommendations(recommendations)
                     
-                    # Chathistory DB저장 추가
-                    serializer = ChatHistorySerializer(data=request.data)
-                    if request.user.is_authenticated:
-                        if serializer.is_valid():
-                            serializer.save(user=request.user, user_message=user_message, bot_response=response_message)
-                            print("db저장 성공 -> chathistory")
+                    # # Chathistory DB저장 추가
+                    # serializer = ChatHistorySerializer(data=request.data)
+                    # if request.user.is_authenticated:
+                    #     if serializer.is_valid():
+                    #         serializer.save(user=request.user, user_message=user_message, bot_response=response_message)
+                    #         print("db저장 성공 -> chathistory")
                     
                     # Recommendation DB저장 추가
                     import re

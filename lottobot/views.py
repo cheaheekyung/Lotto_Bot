@@ -62,24 +62,38 @@ class MainpageAPIView(APIView):
 class MypageAPIView(APIView):
     
     def get(self, request):
-        recommendations = Recommendation.objects.filter(user=request.user).order_by('-created_at')[:10]  # 최근 10개
-        
+        user_id = request.user.id  # 사용자 ID를 명시적으로 가져옴
+        print("현재 로그인한 사용자 ID:", user_id)
+
+        recommendations = Recommendation.objects.filter(user_id=user_id).order_by('-created_at')[:10]
+        print("가져온 추천 데이터:", recommendations)
+
+        if not recommendations:
+            return Response([], status=200)  # 빈 배열 반환
+
         data = []
-        
         for recommendation in recommendations:
-            # gte : greater than or equal to
-            lotto_draw  = LottoDraw.objects.filter(draw_date__gte=recommendation.created_at.date()).order_by('draw_date').first()
+            lotto_draw = LottoDraw.objects.filter(draw_date__gte=recommendation.created_at.date()).order_by('draw_date').first()
             
-            draw_date = lotto_draw .draw_date if lotto_draw  else "아직 추천이후 최신회차가 진행되지 않았습니다."
-            
+            if lotto_draw:
+                draw_date = lotto_draw.draw_date.strftime('%Y-%m-%d')  # 날짜를 문자열로 변환
+            else:
+                draw_date = "아직 추천 이후 최신회차가 진행되지 않았습니다."
+
             rank = "미당첨"
             if lotto_draw:
-                recommended_numbers = set(recommendation.numbers.split(','))
-                winning_numbers = set(lotto_draw.winning_numbers.replace(" ","").split(','))
-                bonus_number = str(lotto_draw.bonus_number)
+                # 공백을 제거하고 추천 번호와 당첨 번호를 처리
+                recommended_numbers = set(num.strip() for num in recommendation.numbers.split(','))
+                winning_numbers = set(num.strip() for num in lotto_draw.winning_numbers.replace(" ","").split(','))
+                bonus_number = str(lotto_draw.bonus_number).strip()  # 보너스 번호도 공백 제거
                 
+                print(f"추천 번호: {recommended_numbers}")
+                print(f"당첨 번호: {winning_numbers}")
+                print(f"보너스 번호: {bonus_number}")
+
                 matched_count = len(recommended_numbers & winning_numbers)
-                
+
+                # 당첨 등수 확인
                 if matched_count == 6:
                     rank = "1등"
                 elif matched_count == 5 and bonus_number in recommended_numbers:
@@ -90,15 +104,22 @@ class MypageAPIView(APIView):
                     rank = "4등"
                 elif matched_count == 3:
                     rank = "5등"
-            
+
             data.append({
                 "created_at": recommendation.created_at,
                 "strategy": recommendation.strategy,
                 "numbers": recommendation.numbers,
-                "draw_date": draw_date,
+                "draw_date": draw_date,  # draw_date를 문자열로 저장
                 "is_prized": rank
             })
-        
+
+        # 데이터 시리얼라이즈 후 반환
         serializer = MypageSerializer(data=data, many=True)
-        serializer.is_valid(raise_exception=True)
+        if not serializer.is_valid():
+            print("시리얼라이저 오류:", serializer.errors)  # 오류 출력
+            return Response({"error": "잘못된 데이터 형식입니다."}, status=400)
+
         return Response(serializer.data)
+
+
+
