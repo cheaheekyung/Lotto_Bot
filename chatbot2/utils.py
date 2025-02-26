@@ -80,6 +80,7 @@ def create_response(message):
         로또 관련 질문이 들어오면 아래 contexts를 참고해서 질문에 답변해.
         추천을 해달라고하면 설명과함께 당첨확률이 높은 번호를 답변해.
         답변을 할때에는 이유와 함께 설명해줘야해.
+        이유는 간결하게 설명해줘.
         
         contexts: {context}
         질문: {question}
